@@ -39,14 +39,16 @@ apache.example.net
 Недостаток метода заключается в том, что пользователю необходимо будет знать номер внешнего порта для обращения к нужному хосту. Например, для входа на apache.example.net через HTTP нужно будет ввести адрес 1.1.1.1:8001
 
 ### Реализация доступа из внешней сети с помощью роутера Mikrotik
-Для того что бы это реализовать воспользуемся web proxy.
+Прописываем в A-записях зарегистрированных доменов адрес *1.1.1.1*  
 
-Включим и настроим web proxy:
+Для реализации используем web proxy.
+
+Включаем web proxy:
 
 `/ip proxy`  
 `set enabled=yes max-cache-object-size=4096KiB` 
 
-Далее создадим правила по которым закроем доступ по телнету и email relaying и разрешим доступ к нашим веб серверам:  
+Далее создаем правила по которым разрешим доступ к нашим веб серверам:  
 ``/ip proxy access`` 
 `add comment="Enable Http Connection" disabled=yes dst-port=80`  
 `add comment="SSH" disabled=yes dst-port=22`  
@@ -72,3 +74,5 @@ apache.example.net
 В firewall разрешаем доступ по порту 8080:
 
 `add action=accept chain=input comment=toProxy dst-port=8080 protocol=tcp`
+
+Недостаток метода: не работает с HTTPS
