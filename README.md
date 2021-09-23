@@ -4,7 +4,7 @@
 `iptables -t nat -A PREROUTING -d 1.1.1.1/32 -p tcp -m tcp --dport 8001 -j DNAT --to-destination 10.0.0.2:80  
 iptables -A FORWARD -m tcp -p tcp -d 10.0.0.2 --dport 80 -j ACCEPT  
 iptables -t nat -A PREROUTING -d 1.1.1.1/32 -p tcp -m tcp --dport 44301 -j DNAT --to-destination 10.0.0.2:443  
-iptables -A FORWARD -m tcp -p tcp -d 10.0.0.2 --dport 443 -j ACCEPT  `
+iptables -A FORWARD -m tcp -p tcp -d 10.0.0.2 --dport 443 -j ACCEPT`
 
 `iptables -t nat -A PREROUTING -d 1.1.1.1/32 -p tcp -m tcp --dport 8002 -j DNAT --to-destination 10.0.0.3:80
 iptables -A FORWARD -m tcp -p tcp -d 10.0.0.3 --dport 80 -j ACCEPT
