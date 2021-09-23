@@ -46,7 +46,7 @@ apache.example.net
 `/ip proxy`  
 `set enabled=yes max-cache-object-size=4096KiB` 
 
-Далее создадим правила по которым закроем доступ по телнету и email relaying и разрешим доступ к нашим веб серверам:
+Далее создадим правила по которым закроем доступ по телнету и email relaying и разрешим доступ к нашим веб серверам:  
 ``/ip proxy access`` 
 `add comment="Enable Http Connection" disabled=yes dst-port=80`  
 `add comment="SSH" disabled=yes dst-port=22`  
