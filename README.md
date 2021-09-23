@@ -47,31 +47,28 @@ apache.example.net
 `set enabled=yes max-cache-object-size=4096KiB` 
 
 Далее создадим правила по которым закроем доступ по телнету и email relaying и разрешим доступ к нашим веб серверам:
-`/ip proxy access` 
-`add comment="Enable Http Connection" disabled=yes dst-port=80`
+``/ip proxy access`` 
+`add comment="Enable Http Connection" disabled=yes dst-port=80`  
 `add comment="SSH" disabled=yes dst-port=22`  
-`add dst-host=apache.example.net dst-port=80` 
-`add dst-host=nginx.example.net dst-port=80`  
-`add dst-host=server1.example.com dst-port=22`  
+`add dst-host=apache.example.net dst-port=80`  
+`add dst-host=nginx.example.net dst-port=80`   
+`add dst-host=server1.example.com dst-port=22`   
 `add dst-host=server2.example.com dst-port=22`  
-
 `add action=deny`  
 
 Прописываем DNS-записи:
 
 `/ip dns static`  
-
 `add address=10.0.0.2 name=apache.example.net`  
 `add address=10.0.0.3 name=nginx.example.net`  
 `add address=10.0.1.1 name=server1.example.com`  
 `add address=10.0.1.2 name=server2.example.com`  
 
-Вот вроде и все осталось только зарулить все запросы из вне на наш прокси:
+Направляем запросы на прокси:
 
-/ip firewall nat
+``/ip firewall nat``  
+`add action=redirect chain=dstnat dst-port=80 in-interface=WAN protocol=tcp to-ports=8080`  
 
-add action=redirect chain=dstnat dst-port=80 in-interface=WAN protocol=tcp to-ports=8080
+В firewall разрешаем доступ по порту 8080:
 
-И не забываем в фаерволе разрешить доступ по порту 8080:
-
-add action=accept chain=input comment=toProxy dst-port=8080 protocol=tcp
+`add action=accept chain=input comment=toProxy dst-port=8080 protocol=tcp`
