@@ -50,7 +50,7 @@ apache.example.net
 
 Далее создаем правила по которым разрешим доступ к нашим веб серверам:
 
-``/ip proxy access`` 
+``/ip proxy access``  
 `add comment="Enable Http Connection" disabled=yes dst-port=80`  
 `add comment="SSH" disabled=yes dst-port=22`  
 `add dst-host=apache.example.net dst-port=80`  
