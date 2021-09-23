@@ -1,5 +1,4 @@
-# Test
-Реализация доступа из внешней сети с помощью Linux-шлюза и утилиты iptables
+### Реализация доступа из внешней сети с помощью Linux-шлюза и утилиты iptables
 
 `iptables -t nat -A PREROUTING -d 1.1.1.1/32 -p tcp -m tcp --dport 8001 -j DNAT --to-destination 10.0.0.2:80`  
 `iptables -A FORWARD -m tcp -p tcp -d 10.0.0.2 --dport 80 -j ACCEPT`  
